@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E7A5F19245F971400F646FA /* DataSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7A5F18245F971400F646FA /* DataSession.swift */; };
 		B24D653C245F27BE009E83B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24D653B245F27BE009E83B2 /* AppDelegate.swift */; };
 		B24D653E245F27BE009E83B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24D653D245F27BE009E83B2 /* SceneDelegate.swift */; };
 		B24D6540245F27BE009E83B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24D653F245F27BE009E83B2 /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E7A5F18245F971400F646FA /* DataSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSession.swift; sourceTree = "<group>"; };
 		B24D6538245F27BE009E83B2 /* TeamWFH_finalproject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamWFH_finalproject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24D653B245F27BE009E83B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B24D653D245F27BE009E83B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				B24D653B245F27BE009E83B2 /* AppDelegate.swift */,
+				4E7A5F18245F971400F646FA /* DataSession.swift */,
 				B24D653D245F27BE009E83B2 /* SceneDelegate.swift */,
 				B24D653F245F27BE009E83B2 /* ViewController.swift */,
 				B24D6560245F4EAD009E83B2 /* SpecificItemViewController.swift */,
@@ -168,6 +171,7 @@
 				B24D6555245F2EF6009E83B2 /* BasicItemTableViewController.swift in Sources */,
 				B24D6563245F5029009E83B2 /* SpecificItemTableViewCell.swift in Sources */,
 				B24D6561245F4EAD009E83B2 /* SpecificItemViewController.swift in Sources */,
+				4E7A5F19245F971400F646FA /* DataSession.swift in Sources */,
 				B24D6546245F27BE009E83B2 /* TeamWFH_finalproject.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

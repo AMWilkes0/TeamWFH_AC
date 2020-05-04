@@ -13,11 +13,14 @@ class BasicItemTableViewController: UITableViewController {
     
     var items = [Items]()
     var thumbnails = [UIImage]()
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadItems()
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -49,6 +52,8 @@ class BasicItemTableViewController: UITableViewController {
          
          return cell!
     }
+    
+   
     
 
     /*
