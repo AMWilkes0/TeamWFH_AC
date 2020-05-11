@@ -161,9 +161,9 @@ extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource
         let bug = bugs2[indexPath.row]
         let cell = specificItemTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SpecificItemTableViewCell
         let name = bug.value(forKey: "name")
-        let price = bug.value(forKey: "price")
+        let price = (bug.value(forKey: "price") as? String)!
         cell!.nameLabel.text = name as? String
-        cell!.priceLabel.text = price as? String
+        cell!.priceLabel.text = "\(price) bells"
         return cell!
         
     }
