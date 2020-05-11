@@ -12,11 +12,14 @@ protocol DataProtocol
 {
     func responseDataHandler(data:String)
     func responseError(message:String)
+    
 }
 
 class DataSession {
     private let urlSession = URLSession.shared
     // url hard coded for now but will eventually want to request with a different titles parameter for fish
+    
+    
     private let urlPathBase = "https://nookipedia.com/w/api.php?action=parse&page=Bugs/New_Horizons&prop=wikitext&format=json&formatversion=2"
     
     private var dataTask:URLSessionDataTask? = nil

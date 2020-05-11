@@ -17,11 +17,13 @@ class SpecificItemViewController: UIViewController, DataProtocol {
     
     var type = ""
     
+    
     // nookipedia api connection
     var dataSession = DataSession()
     var bugs = [String: String]() // dictionary to hold the bug stuff
     var bugs2 :[NSManagedObject] = [] // might do this in core data...
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,7 @@ class SpecificItemViewController: UIViewController, DataProtocol {
         
         // Do any additional setup after loading the view.
     }
+    
     
      //MARK: Data Protocol
         
@@ -85,7 +88,7 @@ class SpecificItemViewController: UIViewController, DataProtocol {
     func someEntityExists(name: String) -> Bool {
         // checks to make sure the bug hasnt already been added to core data... idk if this is working right 
         let managedObjectContext = appDelegate.persistentContainer.viewContext
-       var fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Bug")
+        var fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Bug")
         fetchRequest.predicate = NSPredicate(format: "name = %@", name)
 
         var results: [NSManagedObject] = []
@@ -163,6 +166,15 @@ extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource
         cell!.priceLabel.text = price as? String
         return cell!
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
+        vc?.name = (bugs2[indexPath.row].value(forKeyPath: "name") as? String)!
+        vc?.price = (bugs2[indexPath.row].value(forKey: "price") as? String)!
+        //vc?.name = bugs2[indexPath.row]
+        
+        navigationController?.pushViewController(vc!, animated: true)
     }
     
     

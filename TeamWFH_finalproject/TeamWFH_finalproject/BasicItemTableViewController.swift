@@ -88,6 +88,7 @@ class BasicItemTableViewController: UITableViewController {
     //send to SpecificItemTableViewCell what basic item you selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "SpecificItemViewController") as? SpecificItemViewController
+       
         vc?.type = items[indexPath.row].name
         
         self.navigationController?.pushViewController(vc!, animated: true)
@@ -121,3 +122,4 @@ class BasicItemTableViewController: UITableViewController {
     */
 
 }
+

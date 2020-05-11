@@ -20,6 +20,7 @@
 		B24D655B245F3F51009E83B2 /* BasicItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24D655A245F3F51009E83B2 /* BasicItems.swift */; };
 		B24D6561245F4EAD009E83B2 /* SpecificItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24D6560245F4EAD009E83B2 /* SpecificItemViewController.swift */; };
 		B24D6563245F5029009E83B2 /* SpecificItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24D6562245F5029009E83B2 /* SpecificItemTableViewCell.swift */; };
+		B24D65652469F3EC009E83B2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24D65642469F3EC009E83B2 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		B24D655A245F3F51009E83B2 /* BasicItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicItems.swift; sourceTree = "<group>"; };
 		B24D6560245F4EAD009E83B2 /* SpecificItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificItemViewController.swift; sourceTree = "<group>"; };
 		B24D6562245F5029009E83B2 /* SpecificItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificItemTableViewCell.swift; sourceTree = "<group>"; };
+		B24D65642469F3EC009E83B2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +73,9 @@
 			isa = PBXGroup;
 			children = (
 				B24D653B245F27BE009E83B2 /* AppDelegate.swift */,
-				4E7A5F18245F971400F646FA /* DataSession.swift */,
 				B24D653D245F27BE009E83B2 /* SceneDelegate.swift */,
+				4E7A5F18245F971400F646FA /* DataSession.swift */,
+				B24D65642469F3EC009E83B2 /* DetailViewController.swift */,
 				B24D6560245F4EAD009E83B2 /* SpecificItemViewController.swift */,
 				B24D6562245F5029009E83B2 /* SpecificItemTableViewCell.swift */,
 				B24D6554245F2EF6009E83B2 /* BasicItemTableViewController.swift */,
@@ -167,6 +170,7 @@
 				B24D6555245F2EF6009E83B2 /* BasicItemTableViewController.swift in Sources */,
 				B24D6563245F5029009E83B2 /* SpecificItemTableViewCell.swift in Sources */,
 				B24D6561245F4EAD009E83B2 /* SpecificItemViewController.swift in Sources */,
+				B24D65652469F3EC009E83B2 /* DetailViewController.swift in Sources */,
 				4E7A5F19245F971400F646FA /* DataSession.swift in Sources */,
 				B24D6546245F27BE009E83B2 /* TeamWFH_finalproject.xcdatamodeld in Sources */,
 			);
