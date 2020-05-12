@@ -164,6 +164,7 @@
                         <viewLayoutGuide key="safeArea" id="upd-1A-35F"/>
                     </view>
                     <connections>
+                        <outlet property="searchBar" destination="pdr-i2-3Wp" id="7Tm-EE-shM"/>
                         <outlet property="specificItemTableView" destination="AaA-8m-E6s" id="CId-1w-P7W"/>
                     </connections>
                 </viewController>
