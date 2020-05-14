@@ -9,6 +9,9 @@
 import UIKit
 
 class FavoriteButton: UIButton {
+    
+    //check if the item is in core data. if it is not in core data then add it
+    //if it is in core data then remove it from core data
 
     /*
     // Only override draw() if you perform custom drawing.

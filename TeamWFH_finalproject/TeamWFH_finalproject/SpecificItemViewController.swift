@@ -32,6 +32,7 @@ class SpecificItemViewController: UIViewController, DataProtocol {
     var dataSession = DataSession()
     var bugs = [String: String]() // dictionary to hold the bug stuff
     public var bugsKeys = Array<String>()
+    public var bugsImgURL = Array<String>()
     //var bugs2 :[NSManagedObject] = [] // might do this in core data...
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -69,6 +70,14 @@ class SpecificItemViewController: UIViewController, DataProtocol {
             name.removeLast(3) // remove the " />" on the names
             let data = Array(bugData[1...]) // grab associated data... doing it this way in case we want to get more than price
             //print("data:", data)
+            var bugImg = data[3]
+            bugImg.removeFirst(4)
+            bugImg.removeLast(7)
+            let toArray = bugImg.components(separatedBy: " ")
+            bugImg = toArray.joined(separator: "_")
+            bugImg = "https://nookipedia.com/wiki/" + bugImg
+            print(bugImg)
+            bugsImgURL += [bugImg]
             var price = data[4] // grab the price
             price.removeFirst(2) // remove "| " in the prices
             bugs[name] = price // add to dictionary of all bug names and prices

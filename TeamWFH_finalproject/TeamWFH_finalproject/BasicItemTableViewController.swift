@@ -70,18 +70,16 @@ class BasicItemTableViewController: UITableViewController {
         
         //I did this the 'dumb' way because storing this data in CoreData seemed useless when nothing will be added to the table view
         let thumbnail1 = UIImage(named:"bug")
-        let thumbnail2 = UIImage(named:"fossil")
-        let thumbnail3 = UIImage(named:"fish")
-        let thumbnail4 = UIImage(named: "favorite")
+        let thumbnail2 = UIImage(named:"fish")
+        let thumbnail3 = UIImage(named: "favorite")
        
-        thumbnails += [thumbnail1!, thumbnail2!, thumbnail3!, thumbnail4!]
+        thumbnails += [thumbnail1!, thumbnail2!, thumbnail3!]
        
         let bug = Items(name: "Bug", portrait: "bug")
-        let fossil = Items(name: "Fossil", portrait: "fossil")
         let fish = Items(name: "Fish", portrait: "fish")
         let favorite = Items(name: "Favorites", portrait: "favorite")
        
-        items += [bug, fossil, fish, favorite]
+        items += [bug, fish, favorite]
         
     }
     
