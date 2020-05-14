@@ -31,7 +31,7 @@ class SpecificItemViewController: UIViewController, DataProtocol {
     // nookipedia api connection
     var dataSession = DataSession()
     var bugs = [String: String]() // dictionary to hold the bug stuff
-    var bugsKeys = Array<String>()
+    public var bugsKeys = Array<String>()
     //var bugs2 :[NSManagedObject] = [] // might do this in core data...
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -50,9 +50,7 @@ class SpecificItemViewController: UIViewController, DataProtocol {
         
         // Do any additional setup after loading the view.
     }
-    
-    
-    
+
     
      //MARK: Data Protocol
         
@@ -70,6 +68,7 @@ class SpecificItemViewController: UIViewController, DataProtocol {
             var name = bugData[0] // grab name
             name.removeLast(3) // remove the " />" on the names
             let data = Array(bugData[1...]) // grab associated data... doing it this way in case we want to get more than price
+            //print("data:", data)
             var price = data[4] // grab the price
             price.removeFirst(2) // remove "| " in the prices
             bugs[name] = price // add to dictionary of all bug names and prices
@@ -77,123 +76,41 @@ class SpecificItemViewController: UIViewController, DataProtocol {
 
         }
         self.bugsKeys = Array(bugs.keys)
-        print(bugsKeys)//bugsKeys needs to be global or something, it's empty in the extension. WORK HERE
+        //print("first count:", bugsKeys.count)
+        //print(bugs.keys) // debug
+        //print(bugsKeys)//bugsKeys needs to be global or something, it's empty in the extension. WORK HERE
+        DispatchQueue.main.async {
+            // this is the part that fixed the empty dictionary problem
+            self.specificItemTableView.reloadData()
+        }
+        
     }
     
     func typeTransfer(data: String) {
-       print(data)
+       //print(data)
     }
     
-//    func addBug(name: String, price: String) {
-//        let managedObject = appDelegate.persistentContainer.viewContext
-//        let entity = NSEntityDescription.entity(forEntityName: "Bug", in:
-//               managedObject)!
-//        let newBug = NSManagedObject(entity: entity, insertInto: managedObject)
-//        if (!someEntityExists(name: name)) {
-//            // bug doesnt exist in core data yet
-//            newBug.setValue(name, forKey: "name")
-//            newBug.setValue(price, forKey:"price")
-//
-//
-//            do {
-//                try managedObject.save()
-//
-//            } catch {
-//                let nserror = error as NSError
-//                NSLog("Unable to save \(nserror), \(nserror.userInfo)")
-//                abort()
-//            }
-//        }
-//
-//    }
-    
-//    func someEntityExists(name: String) -> Bool {
-//        // checks to make sure the bug hasnt already been added to core data... idk if this is working right
-//        let managedObjectContext = appDelegate.persistentContainer.viewContext
-//        var fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Bug")
-//        fetchRequest.predicate = NSPredicate(format: "name = %@", name)
-//
-//        var results: [NSManagedObject] = []
-//
-//        do {
-//            results = try managedObjectContext.fetch(fetchRequest)
-//        }
-//        catch {
-//            print("error executing fetch request: \(error)")
-//        }
-//
-//        return results.count > 0
-//    }
-    
-//    func loadBugs() {
-//
-//        //let result:[NSManagedObject];
-//        bugs = [] // reset the array since we are reloading
-//
-//
-//        //1
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return
-//        }
-//
-//        let managedContext =
-//            appDelegate.persistentContainer.viewContext
-//
-//        //2
-//        let fetchRequest =
-//            NSFetchRequest<NSManagedObject>(entityName: "Bug")
-//
-//        //3
-//        do {
-//            let result = try managedContext.fetch(fetchRequest)
-//            for data in result {
-//                let bug = data
-//                bugs2.append(bug)
-//            }
-//        } catch let error as NSError {
-//            print("Could not fetch. \(error), \(error.userInfo)")
-//        }
-//
-//
-//
-//
-//    }
-//
-//        func responseError(message:String) {
-//            //Run this handling on a separate thread
-//
-//            DispatchQueue.main.async() {
-//                print("error")
-//    //            self.titleLabel.text = "Error!"
-//    //            self.bodyTextView.text = message
-//            }
-//        }
-
-
 }
 
 extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return bugs2.count
-        print(self.bugsKeys.count)
         return self.bugsKeys.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         //let bug = bugs2[indexPath.row]
         let cell = specificItemTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SpecificItemTableViewCell
         let name = bugsKeys[indexPath.row]
-        print(name)
+        //print(name)
         let price = bugs[name]
-        print(price!)
+        //print(price!)
         cell!.nameLabel.text = name
-        cell!.priceLabel.text = "\(String(describing: price)) bells"
+        cell!.priceLabel.text = "\(String(describing: price!)) bells"
         return cell!
-        
+
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
         vc?.name = bugsKeys[indexPath.row]
@@ -202,8 +119,7 @@ extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource
 
         navigationController?.pushViewController(vc!, animated: true)
     }
-    
-    
+
 }
 
 //extension SpecificItemViewController : UISearchBarDelegate{//this is for the search bar
