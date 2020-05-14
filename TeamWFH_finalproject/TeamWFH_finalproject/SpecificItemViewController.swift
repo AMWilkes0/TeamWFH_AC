@@ -75,6 +75,7 @@ class SpecificItemViewController: UIViewController, DataProtocol {
             bugImg.removeLast(7)
             let toArray = bugImg.components(separatedBy: " ")
             bugImg = toArray.joined(separator: "_")
+            //print(bugImg)
             bugImg = "https://nookipedia.com/wiki/" + bugImg
             print(bugImg)
             bugsImgURL += [bugImg]
@@ -103,6 +104,7 @@ class SpecificItemViewController: UIViewController, DataProtocol {
 
 extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(self.bugsKeys.count)
         return self.bugsKeys.count
     }
 
