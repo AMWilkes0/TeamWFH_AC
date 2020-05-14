@@ -16,11 +16,12 @@ class DetailViewController: UIViewController {
     
     var name = ""
     var price = ""
-    
+    var imgPath = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imageDetail.image = UIImage(named: imgPath)
         nameDetailLabel.text = name
         priceDetailLabel.text = "Price: \(price) bells"
         // Do any additional setup after loading the view.

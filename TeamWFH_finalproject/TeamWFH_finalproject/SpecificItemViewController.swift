@@ -32,7 +32,8 @@ class SpecificItemViewController: UIViewController, DataProtocol {
     var dataSession = DataSession()
     var bugs = [String: String]() // dictionary to hold the bug stuff
     public var bugsKeys = Array<String>()
-    public var bugsImgURL = Array<String>()
+    public var imgPathDict = [String: String]()
+    //public var bugsImgURL = Array<String>()
     //var bugs2 :[NSManagedObject] = [] // might do this in core data...
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -68,17 +69,15 @@ class SpecificItemViewController: UIViewController, DataProtocol {
             let bugData = Array(bug.components(separatedBy: "\n"))
             var name = bugData[0] // grab name
             name.removeLast(3) // remove the " />" on the names
+            let forImage = name.components(separatedBy: " ") //this and the next line are for making the strings have - for names
+            let joinForImage = forImage.joined(separator: "-")
+            if(type == "Fish"){
+                imgPathDict[name] = "70px-" + joinForImage + "-NH-Icon"
+            } else{
+                imgPathDict[name] = "64px-" + joinForImage + "-NH-Icon"
+            }
             let data = Array(bugData[1...]) // grab associated data... doing it this way in case we want to get more than price
             //print("data:", data)
-            var bugImg = data[3]
-            bugImg.removeFirst(4)
-            bugImg.removeLast(7)
-            let toArray = bugImg.components(separatedBy: " ")
-            bugImg = toArray.joined(separator: "_")
-            //print(bugImg)
-            bugImg = "https://nookipedia.com/wiki/" + bugImg
-            print(bugImg)
-            bugsImgURL += [bugImg]
             var price = data[4] // grab the price
             price.removeFirst(2) // remove "| " in the prices
             bugs[name] = price // add to dictionary of all bug names and prices
@@ -114,8 +113,10 @@ extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource
         let cell = specificItemTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SpecificItemTableViewCell
         let name = bugsKeys[indexPath.row]
         //print(name)
+        let imgPath = imgPathDict[name]!
         let price = bugs[name]
         //print(price!)
+        cell!.itemImage.image = UIImage(named: imgPath)
         cell!.nameLabel.text = name
         cell!.priceLabel.text = "\(String(describing: price!)) bells"
         return cell!
@@ -124,6 +125,8 @@ extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
+        
+        vc?.imgPath = imgPathDict[bugsKeys[indexPath.row]]!
         vc?.name = bugsKeys[indexPath.row]
         vc?.price = bugs[bugsKeys[indexPath.row]]!
         //vc?.name = bugs2[indexPath.row]
