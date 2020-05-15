@@ -33,6 +33,7 @@ class SpecificItemViewController: UIViewController, DataProtocol {
     var bugs = [String: String]() // dictionary to hold the bug stuff
     public var bugsKeys = Array<String>()
     public var imgPathDict = [String: String]()
+    public var timeDayDict = [String: String]()
     //public var bugsImgURL = Array<String>()
     //var bugs2 :[NSManagedObject] = [] // might do this in core data...
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -81,8 +82,10 @@ class SpecificItemViewController: UIViewController, DataProtocol {
             var price = data[4] // grab the price
             price.removeFirst(2) // remove "| " in the prices
             bugs[name] = price // add to dictionary of all bug names and prices
-            //addBug(name: name, price: price)
-
+            var time = data[8]
+            time.removeFirst(2) // remove "| " in active times
+            print("time:",time)
+            timeDayDict[name] = time
         }
         self.bugsKeys = Array(bugs.keys)
         //print("first count:", bugsKeys.count)
@@ -103,7 +106,7 @@ class SpecificItemViewController: UIViewController, DataProtocol {
 
 extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(self.bugsKeys.count)
+        //print(self.bugsKeys.count)
         return self.bugsKeys.count
     }
 
@@ -129,6 +132,7 @@ extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource
         vc?.imgPath = imgPathDict[bugsKeys[indexPath.row]]!
         vc?.name = bugsKeys[indexPath.row]
         vc?.price = bugs[bugsKeys[indexPath.row]]!
+        vc?.timeDay = timeDayDict[bugsKeys[indexPath.row]]!
         //vc?.name = bugs2[indexPath.row]
 
         navigationController?.pushViewController(vc!, animated: true)

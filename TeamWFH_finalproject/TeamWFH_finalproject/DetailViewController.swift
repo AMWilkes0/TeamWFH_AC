@@ -21,6 +21,7 @@ class DetailViewController: UIViewController {
     var name = ""
     var price = ""
     var imgPath = ""
+    var timeDay = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,7 @@ class DetailViewController: UIViewController {
         imageDetail.image = UIImage(named: imgPath)
         nameDetailLabel.text = name
         priceDetailLabel.text = "Price: \(price) bells"
+        timeOfDayDetailLabel.text = "Active time of day: \(timeDay)"
         // Do any additional setup after loading the view.
     }
     
