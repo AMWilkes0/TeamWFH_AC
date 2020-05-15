@@ -20,7 +20,8 @@ class SpecificItemViewController: UIViewController, DataProtocol {
     }
     
 //class SpecificItemViewController: UIViewController {
-
+    
+    var searchedCritter = [String]()
     @IBOutlet weak var specificItemTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -32,6 +33,7 @@ class SpecificItemViewController: UIViewController, DataProtocol {
     var dataSession = DataSession()
     var bugs = [String: String]() // dictionary to hold the bug stuff
     public var bugsKeys = Array<String>()
+    public var reverseDict = Array<String>()
     public var imgPathDict = [String: String]()
     public var timeDayDict = [String: String]()
     public var monthDict = [String: Array<String>]()
@@ -42,6 +44,8 @@ class SpecificItemViewController: UIViewController, DataProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        searchBar.delegate = self
 
         self.title = type
         typeRetrieve.itemType = type
@@ -54,7 +58,10 @@ class SpecificItemViewController: UIViewController, DataProtocol {
         
         // Do any additional setup after loading the view.
     }
-
+    
+    var isSearchBarEmpty: Bool {
+      return searchBar.text?.isEmpty ?? true
+    }
     
      //MARK: Data Protocol
         
@@ -225,14 +232,25 @@ class SpecificItemViewController: UIViewController, DataProtocol {
 extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print(self.bugsKeys.count)
-        return self.bugsKeys.count
+        if !isSearchBarEmpty {
+            return searchedCritter.count
+        } else {
+            return self.bugsKeys.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         //let bug = bugs2[indexPath.row]
         let cell = specificItemTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SpecificItemTableViewCell
-        let name = bugsKeys[indexPath.row]
+        
+        var name = ""
+        if isSearchBarEmpty {
+            name = bugsKeys[indexPath.row]}
+        else{
+            name = searchedCritter[indexPath.row]
+        }
+        
         //print(name)
         let imgPath = imgPathDict[name]!
         let price = bugs[name]
@@ -264,3 +282,18 @@ extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource
 //        print("searchbar");
 //    }
 //}
+extension  SpecificItemViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        //searchedCritter = bugsKeys.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
+        
+        searchedCritter = bugsKeys.filter{return $0.contains(searchText)}
+        
+        print(searchText)
+        print(searchedCritter)
+        print(bugsKeys)
+
+        specificItemTableView.reloadData()
+    }
+    
+}
