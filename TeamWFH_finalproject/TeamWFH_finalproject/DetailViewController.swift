@@ -40,13 +40,13 @@ class DetailViewController: UIViewController {
     }
     
     @objc func northernHemisphereTapped(recognizer: UITapGestureRecognizer){
-        timeOfYearDetailLabel.text = "Active northern months:\n\(months[0])"
+        timeOfYearDetailLabel.text = "Active Northern hemisphere months:\n\(months[0])"
         timeOfYearDetailLabel.sizeToFit()
 
     }
     
     @objc func southernHemisphereTapped(recognizer: UITapGestureRecognizer){
-        timeOfYearDetailLabel.text = "Active southern months:\n\(months[1])"
+        timeOfYearDetailLabel.text = "Active Southern hemisphere months:\n\(months[1])"
     }
 
     /*
