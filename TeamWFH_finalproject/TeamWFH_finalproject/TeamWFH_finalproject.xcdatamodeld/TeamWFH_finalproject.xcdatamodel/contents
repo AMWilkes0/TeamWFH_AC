@@ -8,8 +8,17 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="price" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Favorites" representedClassName="Favorites" syncable="YES" codeGenerationType="class">
+        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nMonths" optional="YES" attributeType="String"/>
+        <attribute name="price" optional="YES" attributeType="String"/>
+        <attribute name="sMonths" optional="YES" attributeType="String"/>
+        <attribute name="time" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="BasicItems" positionX="-63" positionY="-18" width="128" height="73"/>
         <element name="Bug" positionX="-63" positionY="0" width="128" height="73"/>
+        <element name="Favorites" positionX="-63" positionY="9" width="128" height="133"/>
     </elements>
 </model>

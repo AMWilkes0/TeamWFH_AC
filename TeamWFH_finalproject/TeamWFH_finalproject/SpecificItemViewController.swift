@@ -7,10 +7,9 @@
 //
 
 import UIKit
-//import CoreData
+import CoreData
 
 class SpecificItemViewController: UIViewController, DataProtocol {
-    
     func responseError(message: String) {
         DispatchQueue.main.async() {
             print("error")
@@ -39,7 +38,14 @@ class SpecificItemViewController: UIViewController, DataProtocol {
     public var monthDict = [String: Array<String>]()
     //public var bugsImgURL = Array<String>()
     //var bugs2 :[NSManagedObject] = [] // might do this in core data...
+    
+    // what if we just store all the data into one dictionary so its {name: {price: $$, image: img, times: time, months: months, fave: boolean}}
+    // only show faves offline and therefore only store coredata for those that are faved?
+    var faves :[NSManagedObject] = []
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var goToFave = false
+    
+    //var specificCell = SpecificItemTableViewCell() //test
     
 
     override func viewDidLoad() {
@@ -51,10 +57,17 @@ class SpecificItemViewController: UIViewController, DataProtocol {
         typeRetrieve.itemType = type
         typeRetrieve.delegate = self
         let itemType = typeRetrieve.retrieving()
+        loadFaves()
         //searchBar.delegate = (self as UISearchBarDelegate)
         self.dataSession.delegate = self
         self.dataSession.getData(itemURLType: itemType) // test
         //loadBugs()
+        //self.specificCell.delegate = self //test
+
+        
+        
+        print(faves)
+        //resetAllRecords()
         
         // Do any additional setup after loading the view.
     }
@@ -213,18 +226,129 @@ class SpecificItemViewController: UIViewController, DataProtocol {
             
         }
         self.bugsKeys = Array(bugs.keys)
+        // try to switch bugsKeys now to favorites
+        
+        
         //print("first count:", bugsKeys.count)
         //print(bugs.keys) // debug
         //print(bugsKeys)//bugsKeys needs to be global or something, it's empty in the extension. WORK HERE
         DispatchQueue.main.async {
             // this is the part that fixed the empty dictionary problem
+            if (self.title == "Favorites") {
+                self.goToFave = true
+                self.switchToFaves()
+            }
             self.specificItemTableView.reloadData()
         }
         
     }
     
     func typeTransfer(data: String) {
-       //print(data)
+       print(data)
+        
+        // if the type is Favorites can i switch the bugsKeys to be the fave dict here
+        
+    }
+    func resetAllRecords() // entity = Your_Entity_Name
+    {
+
+        let context = ( UIApplication.shared.delegate as! AppDelegate ).persistentContainer.viewContext
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        do
+        {
+            try context.execute(deleteRequest)
+            try context.save()
+        }
+        catch
+        {
+            print ("There was an error")
+        }
+    }
+    
+    func switchToFaves() {
+        //var names = [String]()
+        bugsKeys.removeAll()
+        imgPathDict.removeAll()
+        
+        bugs.removeAll()
+        timeDayDict.removeAll()
+        monthDict.removeAll()
+        print(faves.count)
+        for fave in faves {
+            
+            let name = fave.value(forKey: "name") as! String
+            bugsKeys.append(name)
+            let price = fave.value(forKey: "price") as! String
+            let time = fave.value(forKey: "time") as! String
+            let nMonths = fave.value(forKey: "nMonths") as! String
+            let sMonths = fave.value(forKey: "sMonths") as! String
+            let img = fave.value(forKey: "image") as! String
+            imgPathDict[name] = img
+            bugs[name] = price
+            timeDayDict[name] = time
+            monthDict[name] = [nMonths, sMonths]
+            
+        }
+    }
+    
+    
+    
+    func addFave(name: String, price: String, time: String, sMonths: String, nMonths:String, img:String) {
+        // add a new bug or fish to core data
+        let managedObject = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Favorites", in:
+                  managedObject)!
+        let newFave = NSManagedObject(entity: entity, insertInto: managedObject)
+        newFave.setValue(name, forKeyPath: "name")
+        newFave.setValue(price, forKeyPath: "price")
+        newFave.setValue(time, forKeyPath: "time")
+        newFave.setValue(sMonths, forKeyPath: "sMonths")
+        newFave.setValue(nMonths, forKeyPath: "nMonths")
+        newFave.setValue(img, forKeyPath: "image")
+
+        do {
+            try managedObject.save()
+            loadFaves()
+
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unable to save \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+    }
+    
+    func loadFaves() {
+        
+        faves = [] // reset the array since we are reloading
+
+        //1
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Favorites")
+        
+        //3
+        do {
+            let result = try managedContext.fetch(fetchRequest)
+            for data in result {
+                let fave = data
+                faves.append(fave)
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        DispatchQueue.main.async {
+            // this is the part that fixed the empty dictionary problem
+            //self.specificItemTableView.reloadData()
+        }
+        
     }
     
 }
@@ -245,31 +369,99 @@ extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource
         let cell = specificItemTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SpecificItemTableViewCell
         
         var name = ""
+        
         if isSearchBarEmpty {
             name = bugsKeys[indexPath.row]}
+        
         else{
             name = searchedCritter[indexPath.row]
         }
         
-        //print(name)
-        let imgPath = imgPathDict[name]!
-        let price = bugs[name]
+        
+        var imgPath = imgPathDict[name]!
+        var price = bugs[name]
+     
         //print(price!)
         cell!.itemImage.image = UIImage(named: imgPath)
         cell!.nameLabel.text = name
         cell!.priceLabel.text = "\(String(describing: price!)) bells"
+        // need to check if its a favorite and change the star icon accordingly here
+        //cell!.favoriteImage.image = UIImage(named: favorite)
+        if (faveExists(attr: "name", val: name)) {
+            cell!.favoriteImage.image = UIImage(named: "favorite")
+        }
+        
         return cell!
 
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let managedObject = appDelegate.persistentContainer.viewContext
+        if editingStyle == .delete {
+            let commit = faves[indexPath.row]
+            faves.remove(at: indexPath.row)
+            managedObject.delete(commit)
+            
+            do {
+                try managedObject.save()
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            } catch {
+                let nserror = error as NSError
+                NSLog("Unable to save \(nserror), \(nserror.userInfo)")
+                abort()
+            }
+            //Reload the fruits
+            self.loadFaves()
+
+            //Reload the table view
+            tableView.reloadData()
+            //saveContext()
+        }
+    }
+    
+   
+    func faveExists( attr: String, val: String) -> Bool {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
+        let predicate = NSPredicate(format: "\(attr) == %@", val)
+        request.predicate = predicate
+        request.fetchLimit = 1 // only looking for 1 match
+
+        let managedObjectContext = appDelegate.persistentContainer.viewContext
+
+        var count = 0
+
+        do {
+            count = try managedObjectContext.count(for: request)
+        }
+        catch {
+            print("error executing fetch request: \(error)")
+        }
+
+        return count > 0
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
-        
-        vc?.imgPath = imgPathDict[bugsKeys[indexPath.row]]!
-        vc?.name = bugsKeys[indexPath.row]
-        vc?.price = bugs[bugsKeys[indexPath.row]]!
-        vc?.timeDay = timeDayDict[bugsKeys[indexPath.row]]!
-        vc?.months = monthDict[bugsKeys[indexPath.row]]!
+        var dImgPath = imgPathDict[bugsKeys[indexPath.row]]!
+        var dName = bugsKeys[indexPath.row]
+        var dPrice = bugs[bugsKeys[indexPath.row]]!
+        var dTimeDay = timeDayDict[bugsKeys[indexPath.row]]!
+        var dMonths = monthDict[bugsKeys[indexPath.row]]!
+//        if (goToFave) {
+//            // change values
+//            let item = faves[indexPath.row]
+//            dName = item.value(forKey: "name") as! String
+//            dPrice = item.value(forKey: "price") as! String
+//            dImgPath = item.value(forKey: "image") as! String
+//            dTimeDay = item.value(forKey: "time") as! String
+//            dMonths = [item.value(forKey: "nMonths") as! String, item.value(forKey: "sMonths") as! String]
+//
+//        }
+        vc?.imgPath = dImgPath
+        vc?.name = dName
+        vc?.price = dPrice
+        vc?.timeDay = dTimeDay
+        vc?.months = dMonths
         //vc?.name = bugs2[indexPath.row]
 
         navigationController?.pushViewController(vc!, animated: true)

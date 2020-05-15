@@ -48,6 +48,27 @@ class DetailViewController: UIViewController {
     @objc func southernHemisphereTapped(recognizer: UITapGestureRecognizer){
         timeOfYearDetailLabel.text = "Active Southern hemisphere months:\n\(months[1])"
     }
+    @IBAction func faveButton(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "SpecificItemViewController") as? SpecificItemViewController
+        print("name:", name, "price:", price)
+        // Create the alert controller
+        let alertController = UIAlertController(title: "Alert", message: "Favorite saved!", preferredStyle: .alert)
+
+        // Create the actions
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+            UIAlertAction in
+            NSLog("OK Pressed")
+        }
+
+        // Add the action
+        alertController.addAction(okAction)
+
+        // Present the controller
+        self.present(alertController, animated: true, completion: nil)
+        vc?.addFave(name: name, price: price, time: timeDay, sMonths: months[1], nMonths: months[0], img:imgPath)
+        
+    }
+    
 
     /*
     // MARK: - Navigation

@@ -14,17 +14,19 @@ class SpecificItemTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var favoriteImage: UIImageView!
-    
-
+    //var delegate: SpecificItemViewController!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        //self.delegate = SpecificItemViewController()
         // Configure the view for the selected state
     }
 
 }
+// Only class object can conform to this protocol (struct/enum can't)
+
