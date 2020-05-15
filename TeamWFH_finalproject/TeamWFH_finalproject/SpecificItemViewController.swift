@@ -34,6 +34,7 @@ class SpecificItemViewController: UIViewController, DataProtocol {
     public var bugsKeys = Array<String>()
     public var imgPathDict = [String: String]()
     public var timeDayDict = [String: String]()
+    public var monthDict = [String: Array<String>]()
     //public var bugsImgURL = Array<String>()
     //var bugs2 :[NSManagedObject] = [] // might do this in core data...
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -82,10 +83,68 @@ class SpecificItemViewController: UIViewController, DataProtocol {
             var price = data[4] // grab the price
             price.removeFirst(2) // remove "| " in the prices
             bugs[name] = price // add to dictionary of all bug names and prices
+            
+            // get time of day
             var time = data[8]
             time.removeFirst(2) // remove "| " in active times
-            print("time:",time)
+            //print("time:",time)
             timeDayDict[name] = time
+            
+            // get seasonality
+            var north = data[9]
+            let northMos = north.components(separatedBy: "|") // 3 is start and 4 is end
+            let nData  = northMos[3...]
+            if (nData.count == 2) {
+                // only one start and end
+                var nStart = nData[3]
+                var nEnd = nData[4]
+                nStart.removeFirst(6)
+                nEnd.removeFirst(4)
+                nEnd.removeLast(2)
+                north = "\(nStart) - \(nEnd)"
+            }
+            if (nData.count == 4) {
+                // 2 start and end dates
+                var nStart1 = nData[3]
+                var nEnd1 = nData[4]
+                var nStart2 = nData[5]
+                var nEnd2 = nData[6]
+                nStart1.removeFirst(6)
+                nEnd1.removeFirst(4)
+                nStart2.removeFirst(7)
+                nEnd2.removeFirst(5)
+                nEnd2.removeLast(2)
+                north = "\(nStart1) - \(nEnd1), \(nStart2) - \(nEnd2)"
+            }
+            var south = data[10]
+            let southMos = south.components(separatedBy: "|")
+            let sData = southMos[2...]
+            if (sData.count == 2) {
+                // only one start and end
+                var sStart = sData[2]
+                var sEnd = sData[3]
+                sStart.removeFirst(6)
+                sEnd.removeFirst(4)
+                sEnd.removeLast(2)
+                south = "\(sStart) - \(sEnd)"
+            }
+            if (sData.count == 4) {
+                // 2 start and end dates
+                var sStart1 = sData[2]
+                var sEnd1 = sData[3]
+                var sStart2 = sData[4]
+                var sEnd2 = sData[5]
+                sStart1.removeFirst(6)
+                sEnd1.removeFirst(4)
+                sStart2.removeFirst(7)
+                sEnd2.removeFirst(5)
+                sEnd2.removeLast(2)
+                south = "\(sStart1) - \(sEnd1), \(sStart2) - \(sEnd2)"
+            }
+            monthDict[name] = [north, south]
+
+            
+            
         }
         self.bugsKeys = Array(bugs.keys)
         //print("first count:", bugsKeys.count)
@@ -133,6 +192,7 @@ extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource
         vc?.name = bugsKeys[indexPath.row]
         vc?.price = bugs[bugsKeys[indexPath.row]]!
         vc?.timeDay = timeDayDict[bugsKeys[indexPath.row]]!
+        vc?.months = monthDict[bugsKeys[indexPath.row]]!
         //vc?.name = bugs2[indexPath.row]
 
         navigationController?.pushViewController(vc!, animated: true)

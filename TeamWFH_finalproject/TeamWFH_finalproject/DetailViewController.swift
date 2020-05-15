@@ -22,6 +22,7 @@ class DetailViewController: UIViewController {
     var price = ""
     var imgPath = ""
     var timeDay = ""
+    var months = Array<String>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +40,13 @@ class DetailViewController: UIViewController {
     }
     
     @objc func northernHemisphereTapped(recognizer: UITapGestureRecognizer){
-        timeOfYearDetailLabel.text = "Northern"
+        timeOfYearDetailLabel.text = "Active northern months:\n\(months[0])"
+        timeOfYearDetailLabel.sizeToFit()
+
     }
     
     @objc func southernHemisphereTapped(recognizer: UITapGestureRecognizer){
-        timeOfYearDetailLabel.text = "Southern"
+        timeOfYearDetailLabel.text = "Active southern months:\n\(months[1])"
     }
 
     /*
