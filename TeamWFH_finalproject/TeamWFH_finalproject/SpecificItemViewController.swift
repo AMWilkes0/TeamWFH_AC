@@ -341,7 +341,7 @@ class SpecificItemViewController: UIViewController, DataProtocol {
             }
             catch
             {
-                print(error)
+                print("error")
             }
 
         } catch {
