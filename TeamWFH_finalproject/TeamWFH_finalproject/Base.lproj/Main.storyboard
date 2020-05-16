@@ -233,14 +233,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1" text="Active months:" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrG-G7-Vd8">
-                                <rect key="frame" x="20" y="562.5" width="114" height="20.5"/>
+                                <rect key="frame" x="150" y="562.5" width="114" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1NH-xG-40C">
-                                <rect key="frame" x="85" y="779" width="243" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1NH-xG-40C">
+                                <rect key="frame" x="85" y="778" width="243" height="34"/>
                                 <color key="backgroundColor" red="0.99304046148477043" green="1" blue="0.74555168318814213" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Add/Remove Favorite">
@@ -264,13 +263,15 @@
                             <constraint firstItem="rKM-pC-VNH" firstAttribute="top" secondItem="hPC-av-sWU" secondAttribute="bottom" constant="25" id="POx-OM-8n5"/>
                             <constraint firstItem="QKT-88-xdp" firstAttribute="top" secondItem="hPC-av-sWU" secondAttribute="bottom" constant="100" id="RE3-5s-aKU"/>
                             <constraint firstItem="hPC-av-sWU" firstAttribute="top" secondItem="dES-aM-ckI" secondAttribute="bottom" constant="25" id="RxN-u1-q46"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1NH-xG-40C" secondAttribute="trailing" constant="86" id="SYT-6h-NSH"/>
                             <constraint firstItem="Z0I-4R-swu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="XOy-xX-ekh"/>
+                            <constraint firstItem="1NH-xG-40C" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="85" id="ah7-XL-BQ4"/>
                             <constraint firstItem="LrG-G7-Vd8" firstAttribute="top" secondItem="Ui2-lz-E8H" secondAttribute="bottom" constant="20" id="ayX-wx-Jia"/>
                             <constraint firstItem="dES-aM-ckI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="b7r-qh-48z"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hPC-av-sWU" secondAttribute="trailing" constant="20" id="cWz-Oh-UbV"/>
-                            <constraint firstItem="LrG-G7-Vd8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="fal-DT-VCn"/>
                             <constraint firstItem="pe1-bm-fIa" firstAttribute="top" secondItem="rKM-pC-VNH" secondAttribute="bottom" constant="8" id="j6j-5T-tnC"/>
                             <constraint firstItem="Z0I-4R-swu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="kDN-pc-yso"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1NH-xG-40C" secondAttribute="bottom" constant="50" id="kGh-sk-7Ac"/>
                             <constraint firstItem="QKT-88-xdp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pBf-Yx-N1e"/>
                             <constraint firstItem="bGq-fU-Leb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="106" id="pMI-yw-jAw"/>
                             <constraint firstItem="hPC-av-sWU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="pQ3-OL-w1T"/>
@@ -280,6 +281,7 @@
                             <constraint firstItem="pe1-bm-fIa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="se3-RT-5k7"/>
                             <constraint firstItem="Ui2-lz-E8H" firstAttribute="top" secondItem="bGq-fU-Leb" secondAttribute="bottom" constant="8" id="tdt-AP-lZp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sC4-fG-YJA" secondAttribute="trailing" constant="106" id="usn-tX-oJ9"/>
+                            <constraint firstItem="LrG-G7-Vd8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yNz-gQ-J7I"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
