@@ -36,6 +36,7 @@ class SpecificItemViewController: UIViewController, DataProtocol {
     public var imgPathDict = [String: String]()
     public var timeDayDict = [String: String]()
     public var monthDict = [String: Array<String>]()
+    public var isFavorite = false
     //public var bugsImgURL = Array<String>()
     //var bugs2 :[NSManagedObject] = [] // might do this in core data...
     
@@ -299,6 +300,9 @@ class SpecificItemViewController: UIViewController, DataProtocol {
         let managedObject = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Favorites", in:
                   managedObject)!
+        //let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Favorites")
+        //fetchRequest.predicate = NSPredicate(format: "name!", name)
+        
         let newFave = NSManagedObject(entity: entity, insertInto: managedObject)
         newFave.setValue(name, forKeyPath: "name")
         newFave.setValue(price, forKeyPath: "price")
@@ -317,6 +321,34 @@ class SpecificItemViewController: UIViewController, DataProtocol {
             abort()
         }
         
+    }
+    
+    func removeFave(name: String, price: String, time: String, sMonths: String, nMonths:String, img:String){
+        //delete fish or bug from core data
+        let managedObject = appDelegate.persistentContainer.viewContext
+        //let entity = NSEntityDescription.entity(forEntityName: "Favorites", in: managedObject)!
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
+        fetchRequest.predicate = NSPredicate(format: "name = %@", name)
+        
+        do {
+            let test = try managedObject.fetch(fetchRequest)
+            
+            let objectToDelete = test[0] as! NSManagedObject
+            managedObject.delete(objectToDelete)
+            
+            do{
+                try managedObject.save()
+            }
+            catch
+            {
+                print(error)
+            }
+
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unable to save \(nserror), \(nserror.userInfo)")
+            abort()
+        }
     }
     
     func loadFaves() {
@@ -388,7 +420,11 @@ extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource
         // need to check if its a favorite and change the star icon accordingly here
         //cell!.favoriteImage.image = UIImage(named: favorite)
         if (faveExists(attr: "name", val: name)) {
+            isFavorite = true
+            cell!.favoriteImage.alpha = 1.0
             cell!.favoriteImage.image = UIImage(named: "favorite")
+        } else{
+            cell!.favoriteImage.alpha = 0.0
         }
         
         return cell!
@@ -419,7 +455,7 @@ extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
     
-   
+   //check if a favorite is stored
     func faveExists( attr: String, val: String) -> Bool {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
         let predicate = NSPredicate(format: "\(attr) == %@", val)
@@ -447,6 +483,7 @@ extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource
         var dPrice = bugs[bugsKeys[indexPath.row]]!
         var dTimeDay = timeDayDict[bugsKeys[indexPath.row]]!
         var dMonths = monthDict[bugsKeys[indexPath.row]]!
+        let disFavorite = isFavorite
 //        if (goToFave) {
 //            // change values
 //            let item = faves[indexPath.row]
@@ -462,6 +499,7 @@ extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource
         vc?.price = dPrice
         vc?.timeDay = dTimeDay
         vc?.months = dMonths
+        vc?.isFavorite = disFavorite
         //vc?.name = bugs2[indexPath.row]
 
         navigationController?.pushViewController(vc!, animated: true)
@@ -469,6 +507,7 @@ extension SpecificItemViewController: UITableViewDelegate, UITableViewDataSource
 
 }
 
+//MARK: Search Bar
 //extension SpecificItemViewController : UISearchBarDelegate{//this is for the search bar
 //    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 //        print("searchbar");

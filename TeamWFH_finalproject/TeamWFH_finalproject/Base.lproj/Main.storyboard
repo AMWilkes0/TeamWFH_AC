@@ -14,7 +14,8 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nkV-tC-D0a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexBackgroundColor" red="0.75143663620000001" green="0.94100145729999995" blue="0.91212966669999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemTableViewCell" id="E0G-nT-nql" customClass="BasicItemTableViewCell" customModule="TeamWFH_finalproject" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="150"/>
@@ -36,7 +37,8 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.75143663616925727" green="0.94100145725388606" blue="0.91212966667443074" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="nameItemLabel" destination="LFe-jO-5ZK" id="0hp-yb-IC7"/>
                                     <outlet property="picItemImageView" destination="XpR-Kb-YPD" id="JTe-KZ-qvR"/>
@@ -81,6 +83,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AaA-8m-E6s">
                                 <rect key="frame" x="0.0" y="114" width="414" height="762"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="sectionIndexBackgroundColor" red="0.75143663620000001" green="0.94100145729999995" blue="0.91212966669999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Pft-yR-BTZ" customClass="SpecificItemTableViewCell" customModule="TeamWFH_finalproject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="100"/>
@@ -114,7 +117,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unfavorite" translatesAutoresizingMaskIntoConstraints="NO" id="Wlg-sp-SwL">
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite-sm" translatesAutoresizingMaskIntoConstraints="NO" id="Wlg-sp-SwL">
                                                     <rect key="frame" x="368" y="63" width="26" height="26"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="26" id="Yba-BX-dsY"/>
@@ -133,7 +136,7 @@
                                                 <constraint firstItem="9nQ-cv-skF" firstAttribute="top" secondItem="cDd-cF-GcN" secondAttribute="bottom" constant="8" id="uGh-Q2-AnN"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.75143663620000001" green="0.94100145729999995" blue="0.91212966669999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="favoriteImage" destination="Wlg-sp-SwL" id="UIm-O8-Q9J"/>
                                             <outlet property="itemImage" destination="Tko-z5-B8D" id="uJg-x3-SyV"/>
@@ -149,6 +152,8 @@
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pdr-i2-3Wp">
                                 <rect key="frame" x="0.0" y="58" width="414" height="56"/>
+                                <color key="backgroundColor" red="0.75143663620000001" green="0.94100145729999995" blue="0.91212966669999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                         </subviews>
@@ -236,9 +241,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1NH-xG-40C">
                                 <rect key="frame" x="85" y="779" width="243" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.99304046148477043" green="1" blue="0.74555168318814213" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Add to favorites!">
+                                <state key="normal" title="Add/Remove Favorite">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -246,8 +251,11 @@
                                     <action selector="faveButton:" destination="can-vr-0s5" eventType="touchUpInside" id="r05-21-0Z4"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite-sm" translatesAutoresizingMaskIntoConstraints="NO" id="Z0I-4R-swu">
+                                <rect key="frame" x="20" y="44" width="50" height="50"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.75143663620000001" green="0.94100145729999995" blue="0.91212966669999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Kwm-7C-oIG" secondAttribute="trailing" constant="86" id="24l-MC-whn"/>
                             <constraint firstItem="sC4-fG-YJA" firstAttribute="top" secondItem="QKT-88-xdp" secondAttribute="bottom" constant="8" id="7Lu-HI-EhK"/>
@@ -256,11 +264,13 @@
                             <constraint firstItem="rKM-pC-VNH" firstAttribute="top" secondItem="hPC-av-sWU" secondAttribute="bottom" constant="25" id="POx-OM-8n5"/>
                             <constraint firstItem="QKT-88-xdp" firstAttribute="top" secondItem="hPC-av-sWU" secondAttribute="bottom" constant="100" id="RE3-5s-aKU"/>
                             <constraint firstItem="hPC-av-sWU" firstAttribute="top" secondItem="dES-aM-ckI" secondAttribute="bottom" constant="25" id="RxN-u1-q46"/>
+                            <constraint firstItem="Z0I-4R-swu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="XOy-xX-ekh"/>
                             <constraint firstItem="LrG-G7-Vd8" firstAttribute="top" secondItem="Ui2-lz-E8H" secondAttribute="bottom" constant="20" id="ayX-wx-Jia"/>
                             <constraint firstItem="dES-aM-ckI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="b7r-qh-48z"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hPC-av-sWU" secondAttribute="trailing" constant="20" id="cWz-Oh-UbV"/>
                             <constraint firstItem="LrG-G7-Vd8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="fal-DT-VCn"/>
                             <constraint firstItem="pe1-bm-fIa" firstAttribute="top" secondItem="rKM-pC-VNH" secondAttribute="bottom" constant="8" id="j6j-5T-tnC"/>
+                            <constraint firstItem="Z0I-4R-swu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="kDN-pc-yso"/>
                             <constraint firstItem="QKT-88-xdp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pBf-Yx-N1e"/>
                             <constraint firstItem="bGq-fU-Leb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="106" id="pMI-yw-jAw"/>
                             <constraint firstItem="hPC-av-sWU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="pQ3-OL-w1T"/>
@@ -275,6 +285,7 @@
                     </view>
                     <connections>
                         <outlet property="imageDetail" destination="dES-aM-ckI" id="JO5-Qq-92V"/>
+                        <outlet property="isFavoriteImage" destination="Z0I-4R-swu" id="eVF-wh-Guu"/>
                         <outlet property="nameDetailLabel" destination="hPC-av-sWU" id="PLo-xr-htF"/>
                         <outlet property="northernHemisphereDetail" destination="Ui2-lz-E8H" id="pAI-I1-kyR"/>
                         <outlet property="priceDetailLabel" destination="rKM-pC-VNH" id="fjC-IP-S4S"/>
@@ -291,8 +302,8 @@
     </scenes>
     <resources>
         <image name="bug" width="147" height="149"/>
+        <image name="favorite-sm" width="50" height="50"/>
         <image name="northern hemisphere" width="100" height="100"/>
         <image name="southern hemisphere" width="100" height="100"/>
-        <image name="unfavorite" width="512" height="512"/>
     </resources>
 </document>
